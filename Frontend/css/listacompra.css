@@ -1,0 +1,108 @@
+/*Colores para el modo normal:*/
+:root {
+    --color-barra-lateral: rgb(255, 255, 255);
+    --color-texto: rgb(0, 0, 0);
+    --color-texto-menu: rgb(1, 1, 1);
+    --color-menu-hover-bg: rgb(238, 238, 238);
+    --color-menu-hover-texto: rgb(0, 0, 0);
+    --color-boton: rgb(0, 0, 0);
+    --color-boton-texto: rgb(255, 255, 255);
+    --color-linea: rgb(180, 180, 180);
+    --color-switch-base: rgb(0, 0, 0);
+    --color-switch-circulo: rgb(241, 241, 241);
+    --color-scroll: rgb(192, 192, 192);
+    --color-scroll-hover: rgb(134, 134, 134);
+    --color-fondo-body: #f4f4f4; /* Fondo claro para el modo normal */
+}
+/*Colores para el modo oscuro:*/
+.dark-mode{
+    --color-barra-lateral: rgb(0,0,0);
+    --color-texto: rgb(255,255,255);
+    --color-texto-menu: rgb(255,255,255);
+    --color-menu-hover-bg: rgb(30,30,30);
+    --color-menu-hover-texto:rgb(238,238,238);
+    --color-boton: rgb(255,255,255);
+    --color-boton-texto: rgb(0,0,0);
+    --color-linea: rgb(90,90,90);
+    --color-switch-base: rgb(255,255,255);
+    --color-switch-circulo: rgb(0,0,0);
+    --color-scroll: rgb(68,69,74);
+    --color-scroll-hover: rgb(85,85,85);
+    --color-fondo-body: #000; /* Fondo oscuro para el modo oscuro */
+}
+
+
+/* Estilos lista de compra: */
+.titulo-lista-compra {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em;
+    color: var(--color-texto);
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-boton);
+}
+
+.tabla-lista-compra {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.tabla-lista-compra thead th {
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 0.1em;
+}
+
+.tabla-lista-compra tbody tr {
+    border-bottom: 1px solid var(--color-linea);
+}
+
+.tabla-lista-compra tbody tr:nth-of-type(even) {
+    background-color: var(--color-menu-hover-bg);
+}
+
+.tabla-lista-compra tbody tr:last-of-type {
+    border-bottom: 2px solid var(--color-boton);
+}
+
+.tabla-lista-compra tbody td {
+    padding: 12px;
+    font-size: 0.9em;
+}
+
+#contenedorCompras,
+#contenedorUsuarios,
+#contenedorProveedores,
+#contenedorProductos,
+#contenedorVentas,
+#contenedorCaja,
+#contenedorListaCompra {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px; /* Espacio entre los cards */
+    padding: 10px;
+}
+
+/* Estilos para los cards */
+.card {
+    border: 1px solid var(--color-linea);
+    border-radius: 8px;
+    padding: 20px;
+    background-color: var(--color-barra-lateral);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Para que sea responsivo: */
+@media screen and (max-width: 600px) {
+    .tabla-lista-compra {
+        font-size: 0.8em;
+    }
+}

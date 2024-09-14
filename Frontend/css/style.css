@@ -1,0 +1,590 @@
+/*Colores para el modo normal:*/
+:root{
+    --color-barra-lateral: rgb(255,255,255);
+    --color-texto: rgb(0,0,0);
+    --color-texto-menu: rgb(1,1,1);
+    --color-menu-hover-bg: rgb(238,238,238);
+    --color-menu-hover-texto:rgb(0,0,0);
+    --color-boton: rgb(0,0,0);
+    --color-boton-texto: rgb(255,255,255);
+    --color-linea: rgb(180,180,180);
+    --color-switch-base: rgb(0,0,0);
+    --color-switch-circulo: rgb(241,241,241);
+    --color-scroll: rgb(192,192,192);
+    --color-scroll-hover: rgb(134,134,134);
+    --color-fondo-body: #f4f4f4; /* Fondo claro para el modo normal */
+}
+
+/*Colores para el modo oscuro:*/
+.dark-mode{
+    --color-barra-lateral: rgb(0,0,0);
+    --color-texto: rgb(255,255,255);
+    --color-texto-menu: rgb(255,255,255);
+    --color-menu-hover-bg: rgb(30,30,30);
+    --color-menu-hover-texto:rgb(238,238,238);
+    --color-boton: rgb(255,255,255);
+    --color-boton-texto: rgb(0,0,0);
+    --color-linea: rgb(90,90,90);
+    --color-switch-base: rgb(255,255,255);
+    --color-switch-circulo: rgb(0,0,0);
+    --color-scroll: rgb(68,69,74);
+    --color-scroll-hover: rgb(85,85,85);
+    --color-fondo-body: #000; /* Fondo oscuro para el modo oscuro */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f4f4;
+    color: var(--color-barra-lateral);
+}
+
+/* Para asegurarte de que el modo oscuro aplique al main y otras secciones del dashboard */
+main {
+    background-color: var(--color-fondo-body); /* Fondo variable también para el main */
+    color: var(--color-texto); /* Texto del main */
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.5s ease, background-color 0.3s ease;
+}
+
+main.min-main {
+    margin-left: 80px;
+}
+
+/* Otras secciones que se podrían ver afectadas */
+section {
+    background-color: var(--color-fondo-body);
+    color: var(--color-texto);
+}
+
+h1, h2, h5 {
+    color: #2c3e50;
+}
+
+/* Estilos para botones */
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Botón de cierre de modal */
+.btn-close {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: #333;
+}
+
+/*Menú:*/
+.menu {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+    right: 15px;
+    top: 15px;
+    z-index: 100;
+    transition: background-color 0.3s ease;
+}
+
+/*Barra lateral*/
+.barra-lateral {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 250px;
+    height: 100%;
+    overflow: hidden;
+    padding: 20px 15px;
+    background-color: var(--color-barra-lateral);
+    transition: width 0.5s ease, background-color 0.3s ease, left 0.5s ease;
+    z-index: 100;
+}
+
+.mini-barra-lateral {
+    width: 80px;
+}
+
+.barra-lateral span {
+    width: 100px;
+    white-space: nowrap;
+    text-align: left;
+    font-size: 18px;
+    opacity: 1;
+    transition: opacity 0.5s ease, width 0.5s ease;
+}
+
+.barra-lateral span.oculto {
+    opacity: 0;
+    width: 0;
+}
+
+.barra-lateral .nombre-pagina {
+    width: 100%;
+    height: 45px;
+    color: var(--color-texto);
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.barra-lateral .nombre-pagina i {
+    min-width: 50px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.barra-lateral .nombre-pagina span {
+    margin-left: 5px;
+    font-size: 25px;
+}
+
+/*Botón:*/
+.barra-lateral .boton {
+    width: 100%;
+    height: 45px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--color-boton);
+    color: var(--color-boton-texto);
+    transition: background-color 0.3s ease;
+}
+
+.barra-lateral .boton i {
+    min-width: 50px;
+    font-size: 25px;
+}
+
+/*Barra de navegación:*/
+.barra-lateral .navegacion {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.barra-lateral .navegacion::-webkit-scrollbar {
+    width: 5px;
+}
+
+.barra-lateral .navegacion::-webkit-scrollbar-thumb {
+    background-color: var(--color-scroll);
+    border-radius: 10px;
+}
+
+.barra-lateral .navegacion::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-scroll-hover);
+}
+
+.barra-lateral .navegacion li {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.barra-lateral .navegacion a {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: left;
+    text-decoration: none;
+    border-radius: 10px;
+    color: var(--color-texto-menu);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.barra-lateral .navegacion a:hover,
+.barra-lateral .navegacion a.active {
+    background-color: var(--color-menu-hover-bg);
+    color: var(--color-menu-hover-texto);
+}
+
+.barra-lateral .navegacion i {
+    min-width: 50px;
+    font-size: 20px;
+    align-items: left;
+}
+
+/* Estilos para los submenús */
+.barra-lateral .navegacion .submenu {
+    display: none;
+    list-style: none;
+    padding-left: 30px;
+    transition: max-height 0.3s ease;
+}
+
+.barra-lateral .navegacion .submenu.active {
+    display: block;
+    max-height: 200px;
+}
+
+.barra-lateral .navegacion .submenu li a {
+    padding: 10px 15px;
+    font-size: 0.9em;
+    color: var(--color-texto-menu);
+    transition: all 0.3s ease;
+}
+
+.barra-lateral .navegacion .submenu li a:hover {
+    background-color: var(--color-menu-hover-bg);
+    color: var(--color-menu-hover-texto);
+}
+
+.barra-lateral .navegacion .menu-item .bx-chevron-down {
+    transition: transform 0.3s ease;
+    margin-left: auto;
+    font-size: 20px;
+}
+
+.barra-lateral .navegacion .menu-item.active .bx-chevron-down {
+    transform: rotate(180deg);
+}
+
+/*Para que los métodos get se oculten*/
+.section {
+    display: none; /* All sections are hidden by default */
+}
+
+.section.active {
+    display: block; /* The active section will be shown */
+}
+
+#buscador {
+    position: relative;
+    margin-top: 20px;  /* Ajusta según el diseño */
+}
+
+#contenedorProductos {
+    position: relative;
+    margin-top: 20px;  /* Asegurarnos de que no se solape con otros elementos */
+}
+
+
+
+
+/*Línea*/
+.barra-lateral .linea {
+    width: 100%;
+    height: 1px;
+    margin-top: 15px;
+    background-color: var(--color-linea);
+    transition: background-color 0.3s ease;
+}
+
+/*Modo oscuro:*/
+.barra-lateral .modo-oscuro {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.barra-lateral .modo-oscuro .info {
+    overflow: hidden;
+    width: 150px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    color: var(--color-texto-menu);
+}
+
+.barra-lateral .modo-oscuro i {
+    width: 50px;
+    font-size: 20px;
+}
+
+/*Switch para cambiar a modo oscuro*/
+.barra-lateral .modo-oscuro .switch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    height: 45px;
+    cursor: pointer;
+}
+
+.barra-lateral .modo-oscuro .base {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 35px;
+    height: 20px;
+    background-color: var(--color-switch-base);
+    border-radius: 50px;
+}
+
+.barra-lateral .modo-oscuro .circulo {
+    position: absolute;
+    width: 18px;
+    height: 90%;
+    background-color: var(--color-switch-circulo);
+    border-radius: 50%;
+    left: 2px;
+    transition: left 0.5s ease;
+}
+
+.barra-lateral .modo-oscuro .circulo.prendido {
+    left: 15px;
+}
+
+/*Imagen de usuario:*/
+.barra-lateral .usuario {
+    width: 100%;
+    display: flex;
+}
+
+.barra-lateral .usuario img {
+    width: 50px;
+    min-width: 50px;
+    border-radius: 10px;
+}
+
+.barra-lateral .usuario .info-usuario {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-texto);
+    overflow: hidden;
+}
+
+.barra-lateral .usuario .nombre-email {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+}
+
+.barra-lateral .usuario .nombre {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.barra-lateral .usuario .email {
+    font-size: 13px;
+}
+
+.barra-lateral .usuario i {
+    font-size: 20px;
+}
+
+/*Main para el texto:*/
+main {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.5s ease;
+}
+
+main.min-main {
+    margin-left: 80px;
+}
+
+#btnRegistrarCompra {
+    display: none;
+}
+
+/* Estilo para el modal general */
+.modal-content {
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+}
+
+.modal-header {
+    background-color: #2980b9;
+    color: white;
+    border-bottom: none;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
+}
+
+.modal-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.modal-body {
+    padding: 20px;
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+/* Campos del formulario */
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* Iconos en los campos del formulario */
+.input-group-text {
+    background-color: #3498db;
+    color: white;
+    border: none;
+}
+
+/* Botones del modal */
+.btn-close {
+    color: white;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.btn-success {
+    background-color: #2ecc71;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-success:hover {
+    background-color: #27ae60;
+}
+
+.modal-footer {
+    border-top: none;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Estilos para tablas del carrito */
+#tablaCarrito, #tablaCarritoCompras {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+#tablaCarrito th, #tablaCarrito td, 
+#tablaCarritoCompras th, #tablaCarritoCompras td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#tablaCarrito tr:hover, #tablaCarritoCompras tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Botón para vaciar carrito */
+#btnVaciarCarrito {
+    background-color: #e74c3c;
+}
+
+#btnVaciarCarrito:hover {
+    background-color: #c0392b;
+}
+
+/* Contenedor principal de tarjetas */
+.card-container {
+    display: flex;  /* Flexbox para manejar la disposición */
+    flex-wrap: wrap;  /* Permitir que las tarjetas bajen de fila */
+    gap: 20px;  /* Espacio entre tarjetas */
+    justify-content: flex-start;  /* Alinear tarjetas a la izquierda */
+    padding: 20px;  /* Espaciado interior */
+    width: 100%;  /* Ocupa todo el ancho disponible */
+    box-sizing: border-box;  /* Incluye padding y border en el ancho total */
+    margin-top: 20px; /* Margen superior para separar del contenido anterior */
+}
+
+/* Estilos para cada tarjeta */
+.card {
+    background-color: #28a745;  /* Color de fondo de las tarjetas */
+    color: white;  /* Color del texto */
+    padding: 20px;  /* Espacio interior de las tarjetas */
+    border-radius: 8px;  /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Sombra para las tarjetas */
+    flex: 1 1 calc(33.333% - 40px);  /* Las tarjetas ocuparán 1/3 del contenedor */
+    min-width: 300px;  /* Ancho mínimo de las tarjetas */
+    max-width: 100%;  /* Ancho máximo del 100% del contenedor */
+    transition: transform 0.2s;  /* Efecto al pasar el mouse */
+    margin: 0 auto;  /* Centra la tarjeta si es la única en la fila */
+}
+
+/* Hover de la tarjeta */
+.card:hover {
+    transform: scale(1.05);  /* Efecto de agrandar la tarjeta al pasar el mouse */
+}
+
+
+/*Para que sea responsivo:*/
+
+
+
+@media(max-height:660px) {
+    .barra-lateral .nombre-pagina {
+        margin-bottom: 5px;
+    }
+    .barra-lateral .modo-oscuro {
+        margin-bottom: 3px;
+    }
+}
+
+@media(max-width:600px) {
+    .barra-lateral {
+        position: absolute;
+        left: -250px;
+    }
+
+    .max-barra-lateral{
+        left: 0;
+
+    }
+   
+    .menu {
+        display: flex;
+    }
+
+   
+}
+
+@media screen and (max-width: 768px) {
+    .modal-dialog {
+        width: 95%;
+    }
+}

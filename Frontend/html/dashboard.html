@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+        </style>
+        <link rel="stylesheet " href="/css/listacompra.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="menu">
+        <i class='bx bx-menu'></i>
+        <i class='bx bx-x'></i>
+    </div>
+    <div class="barra-lateral">
+        <div>
+            <div class="nombre-pagina">
+                <i class='bx bx-book-bookmark' id="cloud"></i>
+                <span>Librería Ety</span>
+            </div>
+            <button class="boton" id="btnAgregarProducto">
+                <i class='bx bx-basket'></i>
+                <span>Agregar producto</span>
+            </button>
+        </div>
+        
+        <nav class="navegacion">
+            <ul>
+                <li>
+                    <a href="#" class="menu-item main-menu-item" onclick="toggleMenu(this, 'submenu-ventas'); return false;">
+                        <i class='bx bx-store-alt'></i>
+                        <span>Ventas</span>
+                        <i class='bx bx-chevron-down'></i>
+                    </a>
+                    <ul class="submenu" id="submenu-ventas">
+                        <li><a href="#" onclick="showSection('seccionVentas', verVentas)"><i class='bx bxs-bullseye'></i><span>Ver ventas</span></a></li>
+                        <!-- Modificado el id para que coincida con el JavaScript -->
+                        <li><a href="#" id="crearVentaLink"><i class='bx bxs-cart-add'></i><span>Crear venta</span></a></li>
+                    </ul>
+                </li>
+                
+                <li>
+                    <a href="#" class="menu-item main-menu-item" onclick="toggleMenu(this, 'submenu-compras'); return false;">
+                        <i class='bx bx-cart-download'></i>
+                        <span>Compras</span>
+                        <i class='bx bx-chevron-down'></i>
+                    </a>
+                    <ul class="submenu" id="submenu-compras">
+                        <li><a href="#" onclick="showSection('seccionCompras', verCompras)"><i class='bx bx-list-ul'></i><span>Ver compras</span></a></li>
+                        <li><a href="#" id="crearCompraLink"><i class='bx bx-cart-add'></i><span>Crear compra</span></a></li>
+                    </ul>
+                </li>
+        
+                <li>
+                    <a href="#" onclick="showSection('contenedorListaCompra', cargarListaCompra); return false;">
+                        <i class='bx bx-list-check'></i>
+                        <span>Ver lista de compra</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="#" onclick="showSection('contenedorProductos', mostrarBuscador); return false;">
+                        <i class='bx bx-package'></i>
+                        <span>Ver productos en stock</span>
+                    </a>
+                </li>                
+                
+                <li>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class='bx bx-calculator'></i>
+                        <span>Calcular precio venta</span>
+                    </a>
+                </li>
+        
+                <li>
+                    <a href="#" class="menu-item main-menu-item" onclick="toggleMenu(this, 'submenu-caja'); return false;">
+                        <i class='bx bxl-dropbox'></i>
+                        <span>Apertura/Cierre de caja</span>
+                        <i class='bx bx-chevron-down'></i>
+                    </a>
+                    <ul class="submenu" id="submenu-caja">
+                        <li><a href="#" onclick="showSection('seccionCaja', verCajas); return false;"><i class='bx bx-show'></i><span>Ver caja</span></a></li>
+                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#agregarcaja"><i class='bx bx-edit'></i><span>Gestionar caja</span></a></li>
+                    </ul>
+                </li>
+        
+                <li>
+                    <a href="#" class="menu-item main-menu-item" onclick="toggleMenu(this, 'submenu-usuarios'); return false;">
+                        <i class='bx bx-cog'></i>
+                        <span>Administrar usuarios</span>
+                        <i class='bx bx-chevron-down'></i>
+                    </a>
+                    <ul class="submenu" id="submenu-usuarios">
+                        <li><a href="#" onclick="showSection('seccionUsuarios', verUsuarios)"><i class='bx bx-user'></i><span>Ver usuarios</span></a></li>
+                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#modalRegistroUsuarios"><i class='bx bx-user-plus'></i><span>Crear usuario</span></a></li>
+                    </ul>
+                </li>
+        
+                <li>
+                    <a href="#" class="menu-item main-menu-item" onclick="toggleMenu(this, 'submenu-proveedores'); return false;">
+                        <i class='bx bx-support'></i>
+                        <span>Administrar proveedores</span>
+                        <i class='bx bx-chevron-down'></i>
+                    </a>
+                    <ul class="submenu" id="submenu-proveedores">
+                        <li><a href="#" onclick="showSection('seccionProveedores', verProveedores)"><i class='bx bx-list-ul'></i><span>Ver proveedores</span></a></li>
+                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#agregarproveedores"><i class='bx bx-user-plus'></i><span>Crear proveedor</span></a></li>
+                    </ul>
+                </li>
+        
+                <li>
+                    <a href="#" class="menu-item main-menu-item" onclick="cerrarsesion(); return false;">
+                        <i class='bx bx-log-out'></i>
+                        <span>Cerrar Sesión</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        
+        <div>
+        <div class="linea"></div>
+        <div class="modo-oscuro">
+        <div class="info">
+            <i class='bx bx-moon'></i>
+            <span>Dark Mode</span>
+        </div>
+            <div class="switch">
+                <div class="base">
+                    <div class="circulo">
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="usuario">
+                <img src="/img/usuario.jpg" alt="">
+                 <div class="info-usuario">
+                        <div class="nombre-email">
+                        <span class="nombre">Yurei Kalm</span>
+                        
+                    </div>
+            <i class='bx bx-dots-vertical-rounded'></i>
+                </div>
+            </div>
+                </div>
+
+         </div>
+
+<main>
+
+    <h2 id="contenidoTitulo"></h2>
+    <div id="contenidoTabla"></div>
+    <!-- Contenedores de las secciones -->
+<div id="seccionCompras" style="display:none;">Contenedor Compras</div>
+<div id="seccionUsuarios" style="display:none;">Contenedor Usuarios</div>
+<div id="seccionProveedores" style="display:none;">Contenedor Proveedores</div>
+<div id="contenedorProductos" style="display:none;">Contenedor Productos</div>
+<div id="seccionVentas" style="display:none;">Contenedor Ventas</div>
+<div id="seccionCaja" style="display:none;">Contenedor Caja</div>
+<div id="contenedorListaCompra" style="display:none;">
+    
+    </div>
+    
+   <!-- Buscador que se mostrará al hacer clic en "Ver productos en stock" -->
+<div id="buscador" style="display: none;">
+    <input type="text" id="buscarNombreProducto" placeholder="Buscar producto por nombre">
+    <button id="buscarProductoBtn">Buscar</button>
+</div>
+
+<!-- Contenedor donde se mostrarán las tarjetas de los productos -->
+<div id="contenedorProductos" style="display: none;">
+    <!-- Aquí se llenarán las tarjetas de productos -->
+</div>
+
+<!-- Modal para calcular el precio venta de un producto -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Calcular precio venta de un producto</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Ingrese precio compra</label>
+                    <input type="text" class="form-control" id="cantidad">
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="jumbotron">
+                            <label for="formGroupExampleInput" class="form-label">Ingrese porcentaje por el que desea calcularlo:</label>
+                        </div>
+                        <select id="seleccion" class="estilo">
+                            <option id="blanco" value="0"></option>
+                            <option value="0.1">10%</option>
+                            <option value="0.2">20%</option>
+                            <option value="0.3">30%</option>
+                            <option value="0.4">40%</option>
+                            <option value="0.5">50%</option>
+                            <option value="0.6">60%</option>
+                            <option value="0.7">70%</option>
+                            <option value="0.8">80%</option>
+                            <option value="0.9">90%</option>
+                            <option value="1">100%</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" onclick="calculoPrecio();" class="btn btn-success">Calcular precio</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Fin del modal-->
+
+<!--Modal para agregar productos:-->
+<div class="modal" tabindex="-1" id="modalproducto">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar producto al sistema:</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Nombre del producto:</label>
+                <input type="text" class="form-control" id="nombreproducto">
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Precio Compra:</label>
+                <input type="text" class="form-control" id="precio1">
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Precio Venta</label>
+                <input type="text" class="form-control" id="precio2">
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Cantidad para stock</label>
+                <input type="text" class="form-control" id="cantidadstock">
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Unidad de medida</label>
+                <input type="text" class="form-control" id="unidadmedida">
+            </div>
+
+            <div class="mb-3">
+                <label for="proveedor" class="form-label">Proveedor</label>
+                <select class="form-select" id="proveedor">
+                    <option selected disabled>Seleccione un proveedor</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar Formulario</button>
+          <button type="button" class="btn btn-success" onclick="agregarproducto();">Agregar Producto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--Fin del modal:--> 
+
+<!--Modal para agregar registro de caja:-->
+<div class="modal" tabindex="-1" id="agregarcaja">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Realizar cuadre de caja</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <!--Opciones dentro del modal-->
+         <div class="jumbotron">
+            <label for="formGroupExampleInput" class="form-label">Tipo de operación</label>
+        </div>
+        <select id="operacion" class="estilo">
+            <option id="blancos" value="0"></option>
+            <option value="Apertura">Apertura</option>
+            <option value="Cierre">Cierre</option>
+        </select>
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Dinero inicial:</label>
+            <input type="text" class="form-control" id="dineroinicial">
+        </div>
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Dinero final:</label>
+            <input type="text" class="form-control" id="dinerofinal">
+        </div>
+        
+        <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Observaciones: (opcional)</label>
+            <input type="text" class="form-control" id="observaciones">
+        </div>
+         <!--Fin-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-success" onclick="cuadrecaja();">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--Fin del modal-->
+
+
+<!--Modal para agregar proveedores:-->
+<div class="modal" tabindex="-1" id="agregarproveedores">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar proveedores</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!--Contenido dentro del modal:-->
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Nombre del proveedor:</label>
+                <input type="text" class="form-control" id="proveedorname">
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">No. de teléfono:</label>
+                <input type="text" class="form-control" id="telefono">
+            </div>
+          <!--Fin-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar formulario</button>
+          <button type="button" class="btn btn-success" onclick="guardarproveedor();">Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--Fin del modal-->
+
+    <!--Modal para registrar usuarios:-->
+    <div class="modal" tabindex="-1" id="modalRegistroUsuarios">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar nuevo usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!--Contenido del formulario dentro del modal-->
+                <div class="form-information">
+                    <div class="form-information-childs">
+                        <h2>Crear una cuenta</h2>
+                        <p>Ingresa tus datos:</p>
+                        <form class="form" id="registroForm">
+                            <label>
+                                <i class='bx bxs-user'></i>
+                                <input type="text" placeholder="Nombre de usuario" id="nombreUsuario" required>
+                            </label>
+                            <label>
+                                <i class='bx bxs-lock-alt'></i>
+                                <input type="password" placeholder="Contraseña" id="contraseña" required>
+                            </label>
+                            <label>
+                                <i class='bx bx-envelope'></i>
+                                <input type="email" placeholder="Correo Electrónico" id="correo" required>
+                            </label>
+                            <label for="idRol">
+                                <i class='bx bxs-user-account'></i>Rol:
+                                <select id="idRol" name="idRol" required>
+                                    <option value="" disabled selected>Selecciona un rol</option>
+                                </select>
+                            </label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" onclick="registrarse();">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Fin del modal.-->
+
+
+   <!-- Modal para registrar venta -->
+<div id="modalRegistrarVenta" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 id="modalProductoNombre"></h5>
+            <button type="button" onclick="cerrarModal()" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p id="modalPrecioVenta"></p> <!-- Añadir el precio de venta aquí -->
+            <label for="modalCantidad">Cantidad:</label>
+            <input type="number" id="modalCantidad" min="1" />
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" id="btnConfirmarVenta">Confirmar</button>
+            <button type="button" class="btn btn-danger" onclick="cerrarModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+<!--Fin del modal-->
+
+
+<!--Carrito de ventas:-->
+<div id="carritoDeVentas" style="display: none;">
+    <h2>Carrito de Ventas</h2>
+    <table id="tablaCarrito">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Unidad de Medida</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas se generarán dinámicamente -->
+        </tbody>
+    </table>
+    <button id="realizarVenta" class="btn btn-success" onclick="realizarVenta()">Realizar Venta</button>
+</div>
+<!--Fin del carrito.-->
+
+
+<!-- Modal para registrar compra -->
+<div id="modalRegistrarCompra" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 id="modalProductoNombreCompra"></h5>
+            <button type="button" onclick="cerrarModalCompra()" aria-label="Close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <label for="modalCantidadCompra">Cantidad:</label>
+            <input type="number" id="modalCantidadCompra" min="1" />
+            <p id="modalPrecioCompra"></p> <!-- Mostrar precio de compra aquí -->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" id="btnConfirmarCompra">Confirmar</button>
+            <button type="button" class="btn btn-danger" onclick="cerrarModalCompra()">Cancelar</button>
+        </div>
+    </div>
+</div>
+<!--Fin del modal-->
+
+<!-- Botón para vaciar el carrito -->
+<button id="btnVaciarCarrito" class="btn btn-danger" style="display: none;">Vaciar Carrito</button>
+
+<!-- Contenedor para mostrar el carrito de compras -->
+<div id="carritoDeCompras" style="display: none;">
+    <table id="tablaCarritoCompras">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Compra</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Productos añadidos al carrito de compras se mostrarán aquí -->
+        </tbody>
+    </table>
+    <button id="btnRegistrarCompra" class="btn btn-success" style="display: none;">Registrar Compra</button>
+</div>
+
+<!-- Tabla del carrito de compras -->
+<div id="carritoDeCompras" style="display: none;">
+    <table id="tablaCarritoCompras">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Compra</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Productos añadidos al carrito de compras se mostrarán aquí -->
+        </tbody>
+    </table>
+    <button id="btnRegistrarCompra" class="btn btn-success" style="display: none;">Registrar Compra</button>
+</div>
+
+
+<!-- Contenedor para las tarjetas de compras -->
+<div id="contenedorCompras" class="card-container"></div>
+
+<!-- Contenedor para las tarjetas de usuarios -->
+<div id="contenedorUsuarios" class="card-container"></div>
+
+<!-- Contenedor para las tarjetas de proveedores -->
+<div id="contenedorProveedores" class="card-container"></div>   
+
+<!-- Modal para cambiar el número de teléfono de un proveedor -->
+<div class="modal fade" id="cambiarTelefonoModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Cambiar Número de Teléfono</h5>
+          <!-- Elimina aria-hidden="true" del botón de cierre -->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formCambiarTelefono">
+            <div class="mb-3">
+              <label for="nuevoTelefono" class="form-label">Nuevo Número de Teléfono</label>
+              <input type="text" class="form-control" id="nuevoTelefono" placeholder="Ingresa el nuevo número">
+            </div>
+           <!-- Botón de Guardar Cambios en el Modal -->
+           <button type="button" class="btn btn-success" id="guardarTelefonoBtn">
+            Guardar Cambios
+        </button>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+</div>
+<!--Fin del modal-->
+
+</main>
+
+
+<script src="/js/dashboardscript.js"></script>
+<script src="/js/listacompra.js"></script>
+<!--Función para ver si ya hay un inicio de sesión activo (ver si ya hay un token almacenado):-->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar si existe un token en localStorage
+        const token = localStorage.getItem('token');
+        if (!token) {
+            // Si no hay token, redirigir al login
+            window.location.href = '../index.html';
+        }
+       
+    });
+    </script>
+    <!--Bootstrap:-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+   
+<!--Script que me permite mostrar el nombre de usuario que está en el local storage.-->
+<script>
+    // Obtener el nombre de usuario desde el localStorage
+    const nombreUsuario = localStorage.getItem('nombreUsuario');
+
+    // Comprobar si existe un nombre de usuario en localStorage
+    if (nombreUsuario) {
+        // Seleccionar el elemento donde se mostrará el nombre del usuario
+        const nombreSpan = document.querySelector('.info-usuario .nombre');
+
+        // Actualizar el contenido del span con el nombre del usuario
+        nombreSpan.textContent = nombreUsuario;
+    }
+</script>
+<!--Fin del scritp-->
+
+<!--Script de seguridad que hace que cuando se cierre la pestaña o se resetee, retorne al login.-->
+<script>
+    // Eliminar el token cuando el usuario cierra o recarga la página
+    window.addEventListener('beforeunload', function () {
+        localStorage.removeItem('token');
+    });
+
+    // Verificar si el token existe al cargar la página
+    window.addEventListener('load', function () {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            //Redirigir al login:
+            window.location.href = '../index.html';
+            if (!token) {
+    console.log("No se encontró token, redirigiendo al login");
+    window.location.href = '../index.html';
+}
+        }
+    });
+</script>
+<!--Fin del script-->
+
+</body>
+</html>

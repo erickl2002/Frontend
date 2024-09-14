@@ -1,0 +1,323 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url(/img/imagen1.jpg);
+    background-size: cover;
+}
+
+.container-form {
+    display: flex;
+    border-radius: 20px;
+    box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
+    height: 500px;
+    max-width: 900px;
+    transition: all 1s ease;
+    margin: 10px;
+}
+
+.information {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: #c7eef3;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.info-childs {
+    width: 100%;
+    padding: 0 30px;
+}
+
+.info-childs h2 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.info-childs p {
+    margin: 15px 0;
+    color: #555;
+}
+.info-childs i{
+    margin: 15px 0;
+    color: #555;   
+}
+.info-childs input {
+    background-color: transparent;
+    outline: none;
+    border: solid 2px #9191bd;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: #9191bd;
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.info-childs input:hover {
+    background-color: #9191bd;
+    border: none;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+.form-information {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    text-align: center;
+    background-color: #f8f8f8;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.form-information-childs {
+    padding: 0 30px;
+}
+
+.form-information-childs h2 {
+    color: #333;
+    font-size: 2rem;
+}
+
+.form-information-childs p {
+    color: #555;
+}
+
+.form {
+    margin: 30px 0 0 0;
+}
+
+.form label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    padding: 10px 10px;  /* Aumenta el padding superior e inferior */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    background-color: #fff;
+}
+
+.form label input {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    color: #333;
+    margin-left: 10px; /* Añade espacio entre el ícono y el input */
+}
+
+.form label i {
+    color: #a7a7a7;
+    font-size: 1.2rem; /* Ajusta el tamaño del ícono */
+}
+
+.form label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border-radius: 20px;
+    padding: 0 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.1);
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.form label input,
+.form label select {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    color: #333;
+    appearance: none;
+}
+
+.form label select {
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #f8f8f8;
+    color: #555;
+}
+
+.form label i {
+    color: #a7a7a7;
+    margin-right: 10px;
+}
+
+.form-information-childs {
+    padding: 0 30px;
+}
+
+.form-information-childs select {
+    margin-top: 10px;
+}
+
+.form-information-childs label[for="idRol"] {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+}
+
+.form .submit-btn{
+    background-color: #9191bd;
+    color: #fff;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+
+.form .submit-btn:hover{
+    background-color: #7a7a9a;
+}
+
+.button [type="submit"]{
+    background-color: #9191bd;
+    color: #fff;
+    border-radius: 20px;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+}
+
+.button [type="submit"]:hover{
+    background-color: #7a7a9a;
+}
+
+
+.hide {
+    position: absolute;
+    transform: translateY(-300%);
+}
+
+
+/* Estilos para que el modal se vea bonito: */
+.modal-content {
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Centrar el modal verticalmente en la pantalla */
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Altura mínima para centrar el modal */
+}
+
+/* Contenedor de los campos de entrada y sus íconos */
+.input-group {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Estilo para los íconos */
+.input-group i {
+    font-size: 1.5rem; /* Tamaño del ícono */
+    color: #555; /* Color del ícono */
+    margin-right: 10px;
+}
+
+/* Estilo para los input fields */
+.input-group input {
+    border: none;
+    background: none;
+    padding: 10px;
+    font-size: 1rem;
+    flex: 1; /* Para que el input ocupe el espacio restante */
+    outline: none; /* Elimina el borde al hacer foco */
+}
+
+/* Asegura que los input fields dentro del modal sean responsivos */
+.modal-body .row {
+    display: flex;
+    flex-wrap: wrap; /* Para que los campos se adapten al ancho de la pantalla */
+    gap: 15px; /* Espacio entre los campos */
+}
+
+.modal-body .col {
+    flex: 1; /* Para que los campos ocupen el mismo ancho */
+    min-width: 220px; /* Ancho mínimo para cada campo */
+}
+
+.modal-footer .btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+/* Responsividad */
+@media (max-width: 576px) {
+    .modal-dialog {
+        padding: 10px; /* Reduce el padding en pantallas pequeñas */
+    }
+
+    .modal-body .col {
+        flex: 1 1 100%; /* Los campos ocupan toda la pantalla en dispositivos muy pequeños */
+    }
+}
+
+
+/* para que sea responsivo: */
+
+@media screen and (max-width: 750px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    html {
+        font-size: 10px;
+    }
+
+    .container-form {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .information {
+        width: 100%;
+        padding: 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0;
+    }
+
+    .form-information {
+        width: 100%;
+        padding: 20px;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 0;
+    }
+}
